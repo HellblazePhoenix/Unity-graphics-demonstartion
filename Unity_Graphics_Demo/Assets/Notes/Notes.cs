@@ -20,9 +20,9 @@
  
  
  (Ordered)TODO:
- 1. implement UI
- 2. create finish line
- 3. create scripts for the game mechanics
+ 1. create scripts for the game mechanics
+ 2. 
+ 3. 
  4. 
  5.
  
@@ -31,8 +31,9 @@
  1. Player movement and animations done
  2. Camera controller done
  3. create prefabs for platforms using shaders done
- 
- 
+ 4. Added a game UI
+ 5. Created a finish line platform
+ 6. Death collider unrefined done
  Optional:
  1. Add shaders to the deathbox to make it look hazardous (i.e lava, poison, spikes).
  2. make the surroundings like walls and non game platforms look like enviromental elements.
@@ -42,7 +43,8 @@
  Ideas:
  Hopefully I'll be able to use either layers or active/inactve to control the collisions.
  
- 
+ I could also make a white state where all platforms are ghosts
+ could be good if I want to make walls/barriers
  
  
  
