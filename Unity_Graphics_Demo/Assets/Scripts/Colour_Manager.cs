@@ -12,7 +12,7 @@ public class Colour_Manager : MonoBehaviour
     // List of platforms (Transforms or game objects?)
     public List<Transform> platforms;
     // Reference to the player Transform or material
-    public Transform player;
+    public Material playerMat;
     // References to the color buttons
     public Button Red, Green, Blue;
     // int that records the previous set colour
@@ -36,6 +36,9 @@ public class Colour_Manager : MonoBehaviour
 
         //
 
+        // ensure the player start color is white
+        playerMat.color = UnityEngine.Color.white;
+
         Red.onClick.AddListener(delegate { ChangeColor(1); });
         Green.onClick.AddListener(delegate { ChangeColor(2); });
         Blue.onClick.AddListener(delegate { ChangeColor(3); });
@@ -56,6 +59,7 @@ public class Colour_Manager : MonoBehaviour
         // could be good if I want to make walls/barriers
         if (color == precol) return;
 
+
         string colTag = GetColTag(color);
         string preColTag = GetColTag(precol);
 
@@ -68,11 +72,13 @@ public class Colour_Manager : MonoBehaviour
             {
                 SwitchPlatformState(t);
             }
-            if (t.CompareTag(preColTag))
+            if (preColTag != "Unset" && t.CompareTag(preColTag))
             {
                 SwitchPlatformState(t);
             }
         }
+
+        ChangePlayerColor(color);
 
 
         precol = color;
@@ -91,7 +97,7 @@ public class Colour_Manager : MonoBehaviour
     void SwitchPlatformState(Transform platform)
     {
         // gets a reference to the child platform
-        Transform SolidPlat = GetComponentInChildren<Transform>();
+        Transform SolidPlat = platform.GetChild(0);
 
         // if the platform is solid activate the MeshRenderer on the trans platform and disable the solid platform
         if (SolidPlat.gameObject.activeInHierarchy)
@@ -126,9 +132,28 @@ public class Colour_Manager : MonoBehaviour
                 colTag = "Blue";
                 break;
             default:
-                colTag = "Error";
+                colTag = "Unset";
                 break;
         }
         return colTag;
+    }
+
+    void ChangePlayerColor(int col)
+    {
+        switch (col)
+        {
+            case 1:
+                playerMat.color = UnityEngine.Color.red;
+                break;
+            case 2:
+                playerMat.color = UnityEngine.Color.green;
+                break;
+            case 3:
+                playerMat.color = UnityEngine.Color.blue;
+                break;
+            default:
+                playerMat.color = UnityEngine.Color.white;
+                break;
+        }
     }
 }
